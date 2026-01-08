@@ -12,7 +12,11 @@ biopython
 
 # Machine Learning
 scikit-learn
+google-generativeai
+
 joblib
+
+
 
 # AI / LLM (optional, safe)
 openai
