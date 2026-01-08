@@ -10,10 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "3dmol": "^2.5.3",
     "axios": "^1.13.2",
+    "html2pdf.js": "^0.13.0",
     "lucide-react": "^0.562.0",
+    "molstar": "^5.5.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

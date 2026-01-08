@@ -1,0 +1,40 @@
+/* ReportStyles.css */
+
+#phazegen-report {
+  font-family: "Times New Roman", serif;
+  padding: 30px;
+  color: #000;
+}
+
+#phazegen-report h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+#phazegen-report h2 {
+  font-size: 18px;
+  margin-top: 20px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+}
+
+#phazegen-report p,
+#phazegen-report li {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#phazegen-report ul {
+  padding-left: 20px;
+}
+
+#phazegen-report hr {
+  margin: 20px 0;
+}
+
+.report-meta {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 20px;
+}

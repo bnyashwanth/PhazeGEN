@@ -1,0 +1,377 @@
+/* --- Variables for Easy Theming --- */
+:root {
+  --chat-primary: #2563eb;       /* Royal Blue */
+  --chat-primary-dark: #1e40af;
+  --chat-bg: #ffffff;
+  --chat-bg-secondary: #f3f4f6;
+  --chat-user-bubble: #2563eb;
+  --chat-ai-bubble: #f8fafc;
+  --chat-text-main: #1e293b;
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Wrapper & Toggle Button --- */
+.chat-widget-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.chat-toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--chat-primary), var(--chat-primary-dark));
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chat-toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.chat-toggle-btn.hidden {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- Main Window --- */
+.chat-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 380px;
+  height: 600px;
+  max-height: 80vh;
+  background: var(--chat-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+  transform-origin: bottom right;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.chat-window.open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+/* --- Header --- */
+.chat-header {
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--chat-text-main);
+}
+
+.status-indicator {
+  font-size: 0.75rem;
+  color: #10b981; /* Green */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-indicator::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.close-btn:hover {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* --- Messages Area --- */
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.message-row.user {
+  flex-direction: row-reverse;
+}
+
+.avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ai-avatar {
+    background: #eff6ff;
+    color: var(--chat-primary);
+    width: 40px;
+    height: 40px;
+}
+
+.ai-tiny {
+  background: #eff6ff;
+  color: var(--chat-primary);
+}
+
+.user-tiny {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* --- Chat Bubbles & Markdown Styling --- */
+.chat-bubble {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  
+  /* CRITICAL FIXES FOR ALIGNMENT */
+  text-align: left !important;   /* Force text to start at the left */
+  display: flex;                 /* Fixes flexbox alignment issues */
+  flex-direction: column;        /* Stacks paragraphs nicely */
+  align-items: flex-start;       /* Aligns items to the start */
+}
+
+/* User Bubble Color */
+.chat-bubble.user {
+  background: var(--chat-user-bubble);
+  color: white;
+  border-bottom-right-radius: 4px;
+  align-self: flex-end; /* Ensures the bubble itself sits on the right */
+}
+
+/* AI Bubble Color */
+.chat-bubble.ai {
+  background: var(--chat-ai-bubble);
+  color: var(--chat-text-main);
+  border: 1px solid #e2e8f0;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start; /* Ensures the bubble itself sits on the left */
+}
+
+/* --- FIXING THE MARKDOWN ELEMENTS INSIDE --- */
+/* This ensures headers, lists, and paragraphs align correctly */
+.chat-bubble p, 
+.chat-bubble h1, 
+.chat-bubble h2, 
+.chat-bubble h3, 
+.chat-bubble ul, 
+.chat-bubble li, 
+.chat-bubble strong {
+    text-align: left !important;
+    margin-bottom: 8px;
+    width: 100%; /* Takes full width of bubble */
+}
+
+/* Fix lists indentations */
+.chat-bubble ul, .chat-bubble ol {
+    padding-left: 20px !important;
+    margin: 8px 0 !important;
+}
+
+/* Remove bottom margin from the last element so it fits the bubble */
+.chat-bubble *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Style the headers specifically */
+.chat-bubble h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e40af; /* Dark Blue Header */
+    margin-top: 8px;
+}
+
+/* Markdown Specifics inside Bubble */
+.chat-bubble.ai p { margin: 0 0 8px 0; }
+.chat-bubble.ai p:last-child { margin: 0; }
+.chat-bubble.ai ul { margin: 8px 0; padding-left: 20px; }
+.chat-bubble.ai li { margin-bottom: 4px; }
+.chat-bubble.ai strong { font-weight: 700; color: #0f172a; }
+
+/* --- Input & Suggestions --- */
+.suggestions-row {
+    padding: 8px 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    background: white;
+    scrollbar-width: none; /* Hide scrollbar */
+}
+
+.suggestion-chip {
+    white-space: nowrap;
+    padding: 6px 12px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.suggestion-chip:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.chat-input-area {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.chat-input-area input:focus {
+  border-color: var(--chat-primary);
+}
+
+.send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--chat-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.send-btn:hover:not(:disabled) {
+  background: var(--chat-primary-dark);
+}
+
+.send-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* --- Typing Animation --- */
+.typing .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #94a3b8;
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing .dot:nth-child(1) { animation-delay: -0.32s; }
+.typing .dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Add to ChatAssistant.css */
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  background: #f1f5f9;
+  color: var(--chat-primary);
+}
+
+/* Action Chips - darker and more pro than standard suggestions */
+.suggestion-chip.action-chip {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  color: #1e40af;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.suggestion-chip.action-chip:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}

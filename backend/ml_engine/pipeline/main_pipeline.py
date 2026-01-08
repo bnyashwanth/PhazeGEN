@@ -1,6 +1,8 @@
 import random
 from ml_engine.feature_extraction import sequence_stats, orf_finder, motif_scanner
 from ml_engine.models import risk_model, resistance_model, virulence_model
+# Import the simulation model (Only once)
+from ml_engine.models.simulation_model import run_insilico_trials
 
 def parse_fasta_if_needed(content: str) -> str:
     """Helper to clean FASTA headers if present"""
@@ -46,7 +48,6 @@ def run_analysis_pipeline(sequence: str):
     )
 
     # 4. Protein Structure Mock (Preserving your optional feature)
-    # Simulating a protein structure for the longest ORF if it exists
     protein_structure = None
     if orf_data["orfs"]:
         protein_structure = {
@@ -56,9 +57,16 @@ def run_analysis_pipeline(sequence: str):
             "folding_type": "Alpha-Helix Dominant",
             "description": "Predicted transmembrane domain with high stability."
         }
-    
-    # 5. Construct Final JSON (Matched to Frontend expectation)
-    # Note: We map the new rigorous ML outputs to the simplified frontend format
+
+    # 5. Run In-Silico Trials (The New Feature)
+    # We prepare the specific inputs the simulation model needs
+    trial_inputs = {
+        "resistance_genes": res_results["genes"],
+        "crispr_status": "Present" if crispr_data["present"] else "Absent"
+    }
+    therapeutics_data = run_insilico_trials(trial_inputs)
+
+    # 6. Construct Final JSON (Matched to Frontend expectation)
     explanation = (
         f"The genome has a GC content of {seq_stats['gc_content']}%. "
         f"Analysis identified {res_results['totalResistanceGenes']} potential resistance markers. "
@@ -73,12 +81,19 @@ def run_analysis_pipeline(sequence: str):
         },
         "resistance_genes": res_results["genes"],
         "crispr_status": "Present" if crispr_data["present"] else "Absent",
-        "risk_score": pathogen_risk["riskScore"] / 100.0, # Frontend expects 0.0-1.0
+        
+        # Risk Data
+        "risk_score": pathogen_risk["riskScore"], 
         "risk_level": pathogen_risk["pathogenicRisk"],
+        
+        # Detailed Explainers
         "explanation": explanation,
         "protein_structure": protein_structure,
         
-        # Extra ML details (can be used later)
+        # NEW: Therapeutics Data for the Dashboard (CRITICAL)
+        "therapeutics": therapeutics_data,
+
+        # Extr  a ML details (can be used later)
         "advanced_ml": {
             "virulence": vir_results,
             "hgt_risk": hgt_results

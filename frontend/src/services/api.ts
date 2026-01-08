@@ -7,6 +7,14 @@ export interface ResistanceGene {
   class: string;
   confidence: number;
 }
+export interface Therapeutic {
+  type: string;
+  name: string;
+  target: string;
+  success_prob: number;
+  status: string;
+  notes: string;
+}
 
 export interface ProteinStructure {
   structure_id: string;
@@ -14,6 +22,7 @@ export interface ProteinStructure {
   folding_type: string;
   description: string;
   molecular_weight: string;
+   structure_url: string;
 }
 
 // --- NEW TYPES START ---
@@ -29,6 +38,10 @@ export interface HgtData {
 // --- NEW TYPES END ---
 
 export interface AnalysisResult {
+  orfs: any;
+  virulence_score: any;
+  pathogenic_risk: any;
+  gc_content: any;
   metadata: {
     length: number;
     gc_content: number;
@@ -46,6 +59,8 @@ export interface AnalysisResult {
     virulence: VirulenceData;
     hgt_risk: HgtData;
   };
+
+  therapeutics?: Therapeutic[];
 }
 
 export const analyzeText = async (sequence: string) => {
