@@ -1,6 +1,33 @@
+# Core Web Framework
 fastapi
-uvicorn
-python-multipart
-pydantic
-requests
+uvicorn[standard]
+
+# Data Handling
 numpy
+pandas
+scipy
+
+# Genomics / Bioinformatics
+biopython
+
+# Machine Learning
+scikit-learn
+joblib
+
+# AI / LLM (optional, safe)
+openai
+tiktoken
+
+# File Uploads
+python-multipart
+
+# HTTP Requests
+requests
+
+# Environment Variables
+python-dotenv==1.0.1
+# PDF / Report Generation (optional)
+reportlab
+
+# Logging
+loguru
