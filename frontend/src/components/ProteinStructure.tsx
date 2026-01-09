@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Zap, Activity } from 'lucide-react';
+import {  Zap } from 'lucide-react';
 import type { ProteinStructure as IProteinStructure } from '../services/api';
 import Protein3DViewer from "./Protein3DViewer";
 

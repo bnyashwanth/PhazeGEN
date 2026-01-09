@@ -17,10 +17,12 @@ const ReportModal: React.FC<Props> = ({ isOpen, onClose, data }) => {
   //   window.print(); // Opens the browser's "Save to PDF" dialog
   // };
   const handleDownloadPDF = () => {
-  const reportElement = document.querySelector(".report-body");
-  if (!reportElement) return;
+  // const reportElement = document.querySelector(".report-body");
+const reportElement = document.getElementById('report-content') as HTMLElement;
 
-  const opt = {
+if (!reportElement) return;
+
+  const opt :any = {
     margin: 0.7,
     filename: "PhazeGEN_Clinical_Report.pdf",
     image: { type: "jpeg", quality: 0.98 },
@@ -35,7 +37,7 @@ const ReportModal: React.FC<Props> = ({ isOpen, onClose, data }) => {
     },
   };
 
-  html2pdf().set(opt).from(reportElement).save();
+html2pdf().set(opt).from(reportElement).save();
 };
 
 const metadata = data.metadata || {};
@@ -46,7 +48,7 @@ const protein = data.protein_structure || null;
   const score = data.risk_score || 0;
   const genes = data.resistance_genes || [];
   const therapeutics = data.therapeutics || [];
-  const bestTx = therapeutics.length > 0 ? therapeutics[0] : null;
+  // const bestTx = therapeutics.length > 0 ? therapeutics[0] : null;
 
   return (
     <div className="modal-overlay">

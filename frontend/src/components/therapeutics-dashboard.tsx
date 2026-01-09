@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { Zap, CheckCircle, AlertOctagon } from 'lucide-react';
 
 interface Therapeutic {

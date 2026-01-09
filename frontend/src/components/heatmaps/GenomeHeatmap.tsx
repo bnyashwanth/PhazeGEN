@@ -60,7 +60,13 @@ const GenomeHeatmap: React.FC<Props> = ({
   domain={[0, Math.max(20, gcContent + 10)]}
   tickFormatter={(v) => `${v}%`}
 />
-          <Tooltip formatter={(v: number) => `${v.toFixed(2)}% GC`} />
+<Tooltip
+  formatter={(value) =>
+    typeof value === 'number'
+      ? `${value.toFixed(2)}% GC`
+      : value
+  }
+/>
           <Bar
             dataKey="gc"
             fill="#2563eb"
