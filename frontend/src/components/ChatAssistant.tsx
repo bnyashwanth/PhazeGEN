@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  MessageSquare, X, Send, Sparkles, User, Bot, 
+  MessageSquare, X, Send, Sparkles, Bot, 
   Download, FileText, FlaskConical, ShieldAlert 
 } from 'lucide-react';
 import axios from 'axios';
@@ -11,17 +11,22 @@ import html2pdf from 'html2pdf.js';
 import './ChatAssistant.css';
 import './ReportStyles.css';
 import { captureProteinImage } from "../components/Protein3DViewer";
+import type { AnalysisResult } from '../services/api';
 
-
-interface AnalysisResult {
-  gc_content?: number;
-  pathogenic_risk?: string;
-  virulence_score?: number;
-  crispr_status?: string;
-  resistance_genes?: string[];
-  orfs?: number;
-  therapeutics?: any;
+interface Props {
+  analysisContext: AnalysisResult | null;
 }
+
+
+// interface AnalysisResult {
+//   gc_content?: number;
+//   pathogenic_risk?: string;
+//   virulence_score?: number;
+//   crispr_status?: string;
+//   resistance_genes?: string[];
+//   orfs?: number;
+//   therapeutics?: any;
+// }
 
 interface Props {
   analysisContext: AnalysisResult | null;

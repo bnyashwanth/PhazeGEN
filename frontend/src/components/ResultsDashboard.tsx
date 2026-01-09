@@ -1,16 +1,16 @@
 import React from 'react';
-import { CheckCircle, Dna, ShieldAlert, Thermometer, FlaskConical, Network, AlertTriangle } from 'lucide-react';
+import { CheckCircle, Dna, ShieldAlert, Thermometer, FlaskConical, AlertTriangle } from 'lucide-react';
 import type { AnalysisResult } from '../services/api';
 import ProteinStructure from './ProteinStructure';
-import { TherapeuticsDashboard } from './therapeutics-dashboard';
+// import { TherapeuticsDashboard } from './therapeutics-dashboard';
 // 🔥 NEW MODULE IMPORTS
 import GenomeHeatmap from "./heatmaps/GenomeHeatmap";
 import ResistanceHeatmap from "./heatmaps/ResistanceHeatmap";
 
 import ClinicalTrialTable from "./clinical/ClinicalTrialTable";
 
-import CrisprCasPanel from "./genomics/CrisprCasPanel";
-import HgtRiskPanel from "./genomics/HgtRiskPanel";
+// import CrisprCasPanel from "./genomics/CrisprCasPanel";
+// import HgtRiskPanel from "./genomics/HgtRiskPanel";
 
 
 interface Props {
@@ -26,12 +26,12 @@ const ResultsDashboard: React.FC<Props> = ({ results }) => {
   // Helper to ensure safe access if advanced_ml is missing
   const virulence = results.advanced_ml?.virulence || { virulenceScore: 0, factors: [] };
   const hgt = results.advanced_ml?.hgt_risk || { risk: 'Unknown', score: 0 };
-  const unifiedHgtRisk =
-  results.hgt_risk ||
-  hgt || {
-    level: "Low",
-    explanation: "No mobile genetic elements detected.",
-  };
+  // const unifiedHgtRisk =
+  // results.hgt_risk ||
+  // hgt || {
+  //   level: "Low",
+  //   explanation: "No mobile genetic elements detected.",
+  // };
 return (
   <div className="flex-col" style={{ gap: "1.5rem" }}>
 

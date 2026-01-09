@@ -14,12 +14,15 @@ export interface ResistanceGene {
 }
 
 export interface Therapeutic {
+  interpretation: string;
   type: string;
   name: string;
   target: string;
   success_prob: number;
   status: string;
   notes: string;
+    efficacy?: number; // optional to avoid crash
+
 }
 
 export interface ProteinStructure {
@@ -56,6 +59,7 @@ export interface AnalysisResult {
   risk_score: number;
   risk_level: string;
   explanation: string;
+  hgt_risk?: number;
   protein_structure: ProteinStructure | null;
   advanced_ml?: {
     virulence: VirulenceData;

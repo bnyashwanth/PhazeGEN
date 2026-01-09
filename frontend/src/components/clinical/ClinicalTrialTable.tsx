@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { CheckCircle, AlertTriangle, TrendingUp } from "lucide-react";
 
-interface Therapeutic {
-  name: string;
-  type: "Phage" | "Antibiotic";
-  target: string;
-  efficacy: number; // 0–100
-  interpretation?: string;
-}
+// interface Therapeutic {
+//   name: string;
+//   type: "Phage" | "Antibiotic";
+//   target: string;
+//   efficacy: number; // 0–100
+//   interpretation?: string;
+// }
+import type { Therapeutic } from '../../services/api';
 
 interface Props {
   therapeutics: Therapeutic[];
